@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}Chronabay - Bagikan senyuman terhadap sesama{% endblock %}
+
+{% block body %}
+
+{% block resource %}
+    <link href="{{ BASE_URL }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+<div id="content">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-itemno-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Selamat Datang di <b>Chronabay!</b></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Total Donation</h1>
+        </div>
+
+        <div class="row align-items-start justify-content-center">
+            <div class="col-lg-8 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Total Donasi</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Donatur</th>
+                                        <th>Kategori</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nama Donatur</th>
+                                        <th>Kategori</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for donation in donations %}
+                                        <tr>
+                                            <td>{{ donation['donorName'] }}</td>
+                                            <td>{{ donation['jenis'] }}</td>
+                                            <td>{{ donation['amount'] }}</td>
+                                            <td>{{ donation['donateTime'] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Keterangan</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ BASE_URL }}/img/undraw_posting_photo.svg" alt="">
+                        </div>
+                        <p>Berikut merupakan satuan yang digunakan untuk kolom Jumlah :</p>
+                        <ul>
+                            <li>Uang Tunai : <b>IDR</b></li>
+                            <li>Minyak : <b>Liter</b></li>
+                            <li>Gula : <b>Kg</b></li>
+                        </ul>
+                        <p>Anda bisa menyeleksi kategori donasi menggunakan fitur search maupun memilih di menu left sidebar.</p>
+                        <a href="{{ BASE_URL }}/Donations/donorId">Donasi sekarang &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block script %}
+    <script src="{{ BASE_URL }}/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ BASE_URL }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{ BASE_URL }}/js/demo/datatables-demo.js"></script>
+{% endblock %}
+
+{% endblock %}

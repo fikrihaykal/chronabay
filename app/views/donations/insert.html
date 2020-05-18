@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block title %}Chronabay - Bagikan senyuman terhadap sesama{% endblock %}
+
+{% block body %}
+
+{% block resource %}
+    <link href="{{ BASE_URL }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+<div id="content">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-itemno-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Selamat Datang di <b>Chronabay!</b></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Make Donation</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card shadow mb-4">
+                    <a href="#settingsForm" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">Form Untuk Donasi</h6>
+                    </a>
+                    <div class="collapse show" id="settingsForm">
+                        <div class="card-body">
+                            <div class="p-5">
+                                <form class="user" action="{{ BASE_URL }}/Donations/donationAdd" method="POST">
+                                    <div class="text-xs font-weight-bold text-uppercase text-primary mb-1">Jenis</div>
+                                    <input type="hidden" name="donorId" value="{{ donorSession }}">
+                                    <input type="radio" id="uang" name="jenis" value="Uang Tunai" required>
+                                    <label for="uang">Uang Tunai</label><br />
+                                    <input type="radio" id="minyak" name="jenis" value="Minyak">
+                                    <label for="minyak">Minyak</label><br />
+                                    <input type="radio" id="gula" name="jenis" value="Gula">
+                                    <label for="gula">Gula</label><br />
+                                    <div class="form-group">
+                                        <div class="text-xs font-weight-bold text-uppercase text-primary mb-1">Jumlah</div>
+                                        <input type="text" class="form-control form-control-user" style="border-radius: 0.5vw;" id="target" name="amount" placeholder="Masukkan jumlah donasi" required>
+                                    </div>
+                                    <hr>
+                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Simpan">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-start justify-content-center">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Donasi Yang Belum Diselesaikan</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for donation in donations %}
+                                        <tr>
+                                            <td>{{ donation['jenis'] }}</td>
+                                            <td>{{ donation['amount'] }}</td>
+                                            <td>{{ donation['donateTime'] }}</td>
+                                            <td>
+                                                <form action="{{ BASE_URL }}/Donations/cancelCustom/" method="POST">
+                                                    <input type="hidden" name="donationCancel" value="{{ donation['donationId'] }}">
+                                                    <input type="submit" class="btn btn-danger btn-sm" value="Hapus">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Selesaikan Donasi</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ BASE_URL }}/img/undraw_posting_photo.svg" alt="">
+                            </div>
+                            <p>Terima Kasih telah berdonasi di situs Chronabay. Semoga kebaikan selalu datang pada Anda.</p>
+                            <form class="user" action="{{ BASE_URL }}/Transactions/" method="POST">
+                                <input type="hidden" name="donorId" value="{{ donorSession }}">
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Selesai">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% block script %}
+    <script src="{{ BASE_URL }}/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ BASE_URL }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{ BASE_URL }}/js/demo/datatables-demo.js"></script>
+{% endblock %}
+
+{% endblock %}
