@@ -27,7 +27,7 @@ Saya menggunakan 3 tabel, yaitu :
 - Pertama user harus mengecek keanggotan menggunakan ID
 ![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Make%20Donation%20-%20Check.png?raw=true)
 - Jika belum terdaftar, maka harus mendaftarkan keanggotaan terlebih dahulu
-![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Make%20Donation%20-%20Sign Up.png?raw=true)
+![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Make%20Donation%20-%20Sign%20Up.png?raw=true)
 - Tampilan database tabel `donors` setelah ada pendaftar baru
 ![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Database%20-%20donors.png?raw=true)
 - Jika sudah maka akan dialihkan ke halaman form donasi, disini user bisa menambahkan beberapa kalo donasi dalam 1 transaksi
@@ -40,7 +40,6 @@ Saya menggunakan 3 tabel, yaitu :
 - Tampilan setelah menghapus satu donasi
 ![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Make%20Donation%20-%20After%20Delete.png?raw=true)
 - Jika donasi dirasa telah cukup, user bisa menyelesaikan transaksi
-![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Make%20Donation%20-%20End.png?raw=true)
 - Tampilan database tabel `transactions` setelah menyelesaikan transaksi
 ![alt text](https://github.com/fikrihaykal/chronabay/blob/master/screenshot/Database%20-%20transactions.png?raw=true)
 - Tampilan database tabel `donations` setelah menyelesaikan transaksi
